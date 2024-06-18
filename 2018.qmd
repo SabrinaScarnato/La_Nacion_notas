@@ -1,0 +1,192 @@
+```{r}
+library(rvest)
+library(tidyverse)
+my_data <- readr::read_csv("Links2018.csv")
+my_data <- my_data$url
+```
+
+```{r}
+purrr::map(my_data,~{
+  scrape_news(.x)
+}) %>% 
+  bind_rows()-> my_data
+readr::write_rds(my_data, here::here("scraping-2018.rds"))
+```
+
+```{r}
+library(tidytext)
+my_data <- readRDS("/cloud/project/scraping-2018.rds")
+```
+
+```{r}
+tokenized <- my_data %>% 
+  unnest_tokens(word, content) 
+```
+
+```{r}
+tokenized %>%  filter(word == "loco")
+```
+
+```{r}
+tokenized %>%  filter(word == "loca")
+```
+
+```{r}
+tokenized %>%  filter(word == "trastornado")
+```
+
+```{r}
+tokenized %>%  filter(word == "trastornada")
+```
+
+```{r}
+tokenized %>%  filter(word == "manicomio")
+```
+
+```{r}
+tokenized %>%  filter(word == "suicida")
+```
+
+```{r}
+tokenized %>%  filter(word == "ansiedad")
+```
+
+```{r}
+tokenized %>%  filter(word == "depresivo")
+```
+
+```{r}
+tokenized %>%  filter(word == "depresiva")
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("salud mental")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("salud mental")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("personas usuarias de los servicios de salud mental")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("personas usuarias de los servicios de salud mental")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("personas con padecimiento mental")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("personas con padecimiento mental")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("enfermo mental")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("enfermo mental")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("enferma mental")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("enferma mental")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("enfermedades mentales")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("enfermedades mentales")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("centro de salud mental")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("centro de salud mental")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("personas con diagnostico")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("persona con diagnostico")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("psicópata")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("psicópata")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("problemas de salud menta")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("problemas de salud menta")
+)
+```
+
+```{r}
+my_data$content |> 
+stringr::str_detect("enfermedades psiquiatricas")
+```
+
+```{r}
+sum(
+my_data$content |> 
+stringr::str_detect("enfermedades psiquiatricas")
+)
+```
